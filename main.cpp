@@ -45,7 +45,7 @@ int main()
 	char scelta;
 	char pergets[500];
 
-	int amount, da = -1, a = -1;   //inizializzate in modo tale da creare problemi se non venissero modificate dalla funzione maxmodulo
+	int amount, da = -1, a = -1;   //inizializzate in modo tale da rendermene conto se non venissero modificate dalla funzione maxmodulo
 
 	int capitoli = 0, capitInEsame = 0;     //counters
 	int macroNum = 0; 
@@ -135,11 +135,11 @@ int main()
 				nuova = 1;
 				capitoli++;
 
-				for (int k = 0; k < NUM_COLONNE;)
+				for (int k = 0; k < NUM_COLONNE;)   //Analizzazione colonna per colonna per capire se caricare la riga o no
 				{
-					aux = ScanNoSpace(exc, check);
+					aux = ScanNoSpace(exc, check);   //I dati son caricati in check per essere analizzati
 
-					if (aux)
+					if (aux)  
 						switch (k)
 						{
 						case 0:       //Anno di esercizio
@@ -235,7 +235,7 @@ int main()
 					k += aux;
 				}
 
-				if (exit == 0)
+				if (exit == 0)   //ulteriore controllo. Se exit è rimasto ==0 dopo il controllo di tutte le colonne, carichiamo la riga
 				{
 
 					for (j = 0; j < macroNum; j++)    //controllo se la macro esiste già.
