@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #define FILTRO '5'
 #define NUM_COLONNE 23
 #define MAX_TRANS 200
@@ -19,13 +18,13 @@ struct capitolo   //Tutti i budget sono in centesimi e non in euro
 	char ID[10];
 	int iniziale;    //iniziale + residuo son quello che mi serve
 	int residuo;
-	int finale;    //questo è invece ciò che ho
+	int finale;    //questo Ã¨ invece ciÃ² che ho
 
 	int netto;
-	int backupnetto;   //poichè opero sul netto, uso questa variabile come backup per ricordarmi il netto iniziale
+	int backupnetto;   //poichÃ¨ opero sul netto, uso questa variabile come backup per ricordarmi il netto iniziale
 };
 
-struct macroagg_prog   //c'è una struct per ogni macroaggregato, ma differenzio anche i macroaggregati uguali ma con programma differente.
+struct macroagg_prog   //c'Ã¨ una struct per ogni macroaggregato, ma differenzio anche i macroaggregati uguali ma con programma differente.
 {
 	int macroagg;
 	int prog;
@@ -132,7 +131,7 @@ int main()
 
 			while (!exit2)
 			{
-				exit = 0;                  //variabile che indica se il capitolo è da utilizzare
+				exit = 0;                  //variabile che indica se il capitolo Ã¨ da utilizzare
 				nuova = 1;
 				capitoli++;
 
@@ -144,7 +143,7 @@ int main()
 						switch (k)
 						{
 						case 0:       //Anno di esercizio
-							if (!strcmp(check, ""))      //Se non è citato siamo alla riga di conclusione.
+							if (!strcmp(check, ""))      //Se non Ã¨ citato siamo alla riga di conclusione.
 							{
 								exit = 1;
 								exit2 = 1;
@@ -161,7 +160,7 @@ int main()
 							break;
 
 						case 6:       //Macroaggregato
-							if (!strcmp(check, ""))        //Se non è citato il macroaggregato, non mi interessa.
+							if (!strcmp(check, ""))        //Se non Ã¨ citato il macroaggregato, non mi interessa.
 								exit = 1;
 							else
 							{
@@ -188,7 +187,7 @@ int main()
 							break;
 
 						case 8:       //CntrResp
-							if (check[10] != FILTRO)     //se il CntroResp non finisce per 05, è da ignorare.
+							if (check[10] != FILTRO)     //se il CntroResp non finisce per 05, Ã¨ da ignorare.
 								exit = 1;
 
 							for (int bl = 0; bl < blackNum; bl++)     //Controllo della blacklist
@@ -219,7 +218,7 @@ int main()
 
 							dubresiduo = strtod(check, NULL);
 							temp_residuo = round(dubresiduo * 100);
-							if (temp_iniz + temp_residuo - temp_fin == 0)   //Se il netto è 0, non ci interessa il capitolo.
+							if (temp_iniz + temp_residuo - temp_fin == 0)   //Se il netto Ã¨ 0, non ci interessa il capitolo.
 								exit = 1;
 							break;
 
@@ -239,7 +238,7 @@ int main()
 				if (exit == 0)
 				{
 
-					for (j = 0; j < macroNum; j++)    //controllo se la macro esiste già.
+					for (j = 0; j < macroNum; j++)    //controllo se la macro esiste giÃ .
 					{
 						if (macro[j].macroagg == temp_macroID && macro[j].prog == temp_prog)
 						{
@@ -248,7 +247,7 @@ int main()
 						}
 
 					}
-					if (nuova)    //se esiste, il for esce e j indica che numero è quella macro
+					if (nuova)    //se esiste, il for esce e j indica che numero Ã¨ quella macro
 					{
 						i = macroNum;
 						macroNum++;
@@ -384,7 +383,7 @@ int main()
 }
 
 
-//È un fscanf per stringhe di file excel (.csv) N.B. elimina spazi e virgole dai dati di excel oltre a registrarli. 
+//Ãˆ un fscanf per stringhe di file excel (.csv) N.B. elimina spazi e virgole dai dati di excel oltre a registrarli. 
 //Restituisce 1 se ha captato una stringa, 0 altrimenti.
 int ScanNoSpace(FILE *ptr, char *stringa)   
 {
@@ -392,7 +391,7 @@ int ScanNoSpace(FILE *ptr, char *stringa)
 	char aux;
 
 	fscanf(ptr, "%c", &aux);
-	if (aux == '"') //prima controlliamo che il primo carattere sia un ", poi scannerizziamo ciò che è dentro le virgolette saltando gli spazi
+	if (aux == '"') //prima controlliamo che il primo carattere sia un ", poi scannerizziamo ciÃ² che Ã¨ dentro le virgolette saltando gli spazi
 	{
 		fscanf(ptr, "%c", &aux);
 
@@ -453,7 +452,7 @@ int findTrans(macroagg_prog esame, int *positivo, int *negativo)
 					checkneg = 1;
 
 
-					//Inizializziamo min_neg col negativo più piccolo in modulo che troviamo per ora: ci servirà se non abbiamo numeri positivi sufficientemente grandi!
+					//Inizializziamo min_neg col negativo piÃ¹ piccolo in modulo che troviamo per ora: ci servirÃ  se non abbiamo numeri positivi sufficientemente grandi!
 					min_neg = esame.capitoli[i].netto*(-1);   
 					min_negindex = i;
 						
@@ -480,7 +479,7 @@ int findTrans(macroagg_prog esame, int *positivo, int *negativo)
 
 		if (near >= 0)
 		{
-			for (int i = 0; i < esame.numCapit; i++)   //cerca il numero positivo più piccolo tra i più grandi in modulo del negativo
+			for (int i = 0; i < esame.numCapit; i++)   //cerca il numero positivo piÃ¹ piccolo tra i piÃ¹ grandi in modulo del negativo
 				if (esame.capitoli[i].netto > 0 && esame.capitoli[i].netto + esame.capitoli[*negativo].netto >= 0 && esame.capitoli[i].netto + esame.capitoli[*negativo].netto < near)
 				{
 					near = esame.capitoli[i].netto + esame.capitoli[*negativo].netto;
@@ -496,7 +495,7 @@ int findTrans(macroagg_prog esame, int *positivo, int *negativo)
 
 	} while (near<0 && num_scarti < esame.numCapit);
 
-	if (checkneg == 0)  //Se succede questo, vuol dire che tutti i negativi erano più grandi in modulo dei positivi: procedo cercando di azzerare almeno i negativi più piccoli in modulo.
+	if (checkneg == 0)  //Se succede questo, vuol dire che tutti i negativi erano piÃ¹ grandi in modulo dei positivi: procedo cercando di azzerare almeno i negativi piÃ¹ piccoli in modulo.
 	{
 		max = 0;
 
@@ -536,7 +535,7 @@ int findTrans(macroagg_prog esame, int *positivo, int *negativo)
 	{
 		return 3;
 	}
-	if (checkneg == 1 && checkpos == 1)   //La funzione è stata eseguita interamente correttamente e i valori di negativo e positivo son cambiati
+	if (checkneg == 1 && checkpos == 1)   //La funzione Ã¨ stata eseguita interamente correttamente e i valori di negativo e positivo son cambiati
 	{
 		return 1;
 	}
