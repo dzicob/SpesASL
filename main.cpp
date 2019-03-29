@@ -1,3 +1,5 @@
+// Code by dzicob 20/02/'19
+
 #define FILTRO '5'
 #define NUM_COLONNE 23
 #define MAX_TRANS 200
