@@ -1,4 +1,9 @@
-// code by dzicob 20/02/2019
+// code by dzicob - last update: 20/02/2019
+
+/* 
+   Questo non rappresenta esattamente come programmo ora: ho imparato qualche design pattern e preferisco tenere il main
+   più snello. È però l'ultimo progetto personale a cui ho lavorato.
+*/
 
 #define FILTRO '5'
 #define NUM_COLONNE 23
